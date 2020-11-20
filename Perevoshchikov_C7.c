@@ -20,6 +20,11 @@ typedef struct cardReader
     unsigned memoryStick: 1; 
 } CR;
 
+union forCR{
+    struct cardReader card;
+    int i;    
+}reader;
+
 double area(struct triangle tria){
     return 0.5 * abs((tria.dot1[0] - tria.dot3[0]) * (tria.dot2[1] - tria.dot3[1]) - (tria.dot2[0] - tria.dot3[0]) * (tria.dot1[1] - tria.dot3[1]));
 }
@@ -32,16 +37,14 @@ int main() {
 
     Tria tria = {{1,1}, {2,2}, {1,3}};
     printf("hex number: ");
-    scanf("%x", &num);
-    CR myCR = {num & 1, num >> 1 & 1, num >> 2 & 1};
-
+    scanf("%x", &reader.i);
     
     paint = watercolor;
 
 
     printf("watercolor: %d\n", paint);
     printf("area of triangle: %d\n", area);
-    printf("activeCR: %i\n compact flash: %i\n memory stick: %i\n", myCR.activeSD, myCR.compactFlash, myCR.memoryStick);
+    printf("activeCR: %i\ncompact flash: %i\nmemory stick: %i\n", reader.card.activeSD, reader.card.compactFlash, reader.card.memoryStick);
 
     system("pause");
     return 0;

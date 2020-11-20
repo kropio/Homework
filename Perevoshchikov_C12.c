@@ -3,28 +3,22 @@
 #include <io.h>
 #include <sys\stat.h>
 
-
-int main() {
-    int amountOfFolders, fp;
-    fp = creat("file.txt", 0000200);
-    printf("How much folder you want to create?\n");
-    scanf("%d", &amountOfFolders);
-    char nameOfFolder[255];
-    gets(nameOfFolder);
-
+int main(int argc, char **argv) 
+{ 
+    int fp;
+    fp = creat(argv[1], 0000200);
     FILE *S;
-    S = fopen("Created_folders.txt", "w");
 
-    for(int i = 0; i < amountOfFolders; i++){
-        printf("write name of folder\n");
-        gets(nameOfFolder);
-        _mkdir(nameOfFolder);
-        fprintf(S, "%s\n", nameOfFolder);
+    S = fopen(argv[1], "w");
+
+    for (int i = 2; i < argc; i++)
+    {
+        _mkdir(argv[i]);
+        fprintf(S, "%s\n", argv[i]);
     }
     fclose(S);
-    
+
     getch();
-    
+
     return 0;
 }
-
