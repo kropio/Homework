@@ -62,10 +62,14 @@ void deleteSpaces(char *strPo, char *withoutSpaces, int numOfSpaces, int *lastDo
         *(withoutSpaces + 1) = '\n';
         return;
     }
-    if (*strPo == ' '){numOfSpaces++;}
+    if (*strPo == ' '){
+        numOfSpaces++;
+        }
     if (numOfSpaces != 3){
         *withoutSpaces = *strPo;
         withoutSpaces++;
-    }else{numOfSpaces = 0;}
+    }else{
+        numOfSpaces = 0;
+        }
     deleteSpaces(strPo + 1, withoutSpaces, numOfSpaces, lastDot);
 }
